@@ -1,19 +1,25 @@
 {
   "name": "myfirstbigproject",
   "version": "1.0.0",
-  "description": "My first big, and probably realy cool website, where users can leave reviews for food and drinks",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
   },
-  "keywords": [
-    "js",
-    "clearjs",
-    "firstproject"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shuroff/myFirstBigProject.git"
+  },
   "author": "Alexander Levterov",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shuroff/myFirstBigProject/issues"
+  },
+  "homepage": "https://github.com/Shuroff/myFirstBigProject#readme",
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "html-webpack-plugin": "^5.5.0",
     "webpack": "^5.66.0",
     "webpack-cli": "^4.9.1"
   }
