@@ -1,1 +1,1 @@
-# My First Cool Website see you soon on my website!
+# See you soon on my first website, bro!
