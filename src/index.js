@@ -1,6 +1,11 @@
 import './styles/styles.css'
+import './styles/drinks.css'
+import './styles/food.css'
+import './styles/addposts.css'
 import './user'
 import { authWithEmailAndPass } from './auth'
+import { drinksPageHandler } from './drinkspage'
+import { foodPageHandler } from './foodpage'
 
 const myModal = document.getElementById('myModal')
 
@@ -36,3 +41,15 @@ myModal.addEventListener('click', (event) => {
 })
 
 signIn.addEventListener('click', (event) => authFormHandler(event))
+
+const drinksPage = document.getElementById('drinks')
+
+const eatPage = document.getElementById('food')
+
+drinksPage.addEventListener('click', (event) => {
+  drinksPageHandler(event)
+})
+
+eatPage.addEventListener('click', (event) => {
+  foodPageHandler(event)
+})

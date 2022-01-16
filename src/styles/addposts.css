@@ -1,0 +1,11 @@
+.add-post__wrapper {
+  width: 100%;
+}
+.add-post__container {
+  width: 600px;
+  margin: auto;
+  margin-top: 2rem;
+}
+#create-post {
+  margin-top: 1rem;
+}
