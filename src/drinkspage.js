@@ -46,7 +46,6 @@ export function drinksPageHandler(event) {
   const mainBody = document.querySelector('.main__body')
   mainBody.innerHTML = HTML
   const createBtn = mainBody.querySelector('#create')
-  console.log(createBtn)
   createBtn.addEventListener('click', PostPage)
   if (event.target.id) {
     setActiveNavLink(event.target.id)

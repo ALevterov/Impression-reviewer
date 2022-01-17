@@ -9,3 +9,11 @@
 #create-post {
   margin-top: 1rem;
 }
+img {
+  margin-top: 1rem;
+  width: 300px;
+  height: auto;
+}
+.image-container {
+  display: flex;
+}
