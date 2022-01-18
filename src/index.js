@@ -3,9 +3,27 @@ import './styles/drinks.css'
 import './styles/food.css'
 import './styles/addposts.css'
 import './user'
-import { authWithEmailAndPass } from './auth'
+import { authFormHandler } from './auth'
 import { drinksPageHandler } from './drinkspage'
 import { foodPageHandler } from './foodpage'
+
+import firebase from 'firebase/compat/app'
+import { getStorage } from 'firebase/storage'
+import { appendChild } from 'domutils'
+// import { getAnalytics } from "firebase/analytics";
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyBd47pDOwXOBjmLwWclzincO3mpTpkSYGk',
+  authDomain: 'mealreviewer.firebaseapp.com',
+  projectId: 'mealreviewer',
+  storageBucket: 'mealreviewer.appspot.com',
+  messagingSenderId: '509649353294',
+  appId: '1:509649353294:web:385fc8786713e6bf9ba11f',
+  measurementId: 'G-XX9ML2K4FV',
+}
+const app = firebase.initializeApp(firebaseConfig)
+
+const storage = getStorage(app)
 
 const myModal = document.getElementById('myModal')
 
@@ -13,25 +31,11 @@ const signInBtn = document.getElementById('signIn')
 
 const signIn = document.getElementById('enter')
 
+let drinksId = 0
 function showModal() {
   myModal.style.display = 'block'
 }
 signInBtn.addEventListener('click', showModal)
-
-function authFormHandler(event) {
-  event.preventDefault()
-  const emailInput = myModal.querySelector('#email-input')
-  const passInput = myModal.querySelector('#password-input')
-
-  const email = emailInput.value.trim()
-  const password = passInput.value.trim()
-  console.log(email, password)
-
-  authWithEmailAndPass(email, password).then((token) => console.log(token))
-
-  emailInput.value = ''
-  passInput.value = ''
-}
 
 myModal.addEventListener('click', (event) => {
   console.log(event.target.dataset['data-closable'])

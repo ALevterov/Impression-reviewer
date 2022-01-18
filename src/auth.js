@@ -1,5 +1,5 @@
 export function authWithEmailAndPass(email, password) {
-  const apiKey = 'AIzaSyConfk-AACwT1JbcruOC6mLT5KS7W77P38'
+  const apiKey = 'AIzaSyBd47pDOwXOBjmLwWclzincO3mpTpkSYGk'
   return fetch(
     `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
     {
@@ -16,4 +16,18 @@ export function authWithEmailAndPass(email, password) {
   )
     .then((response) => response.json())
     .then((data) => data.idToken)
+}
+export function authFormHandler(event) {
+  event.preventDefault()
+  const emailInput = myModal.querySelector('#email-input')
+  const passInput = myModal.querySelector('#password-input')
+
+  const email = emailInput.value.trim()
+  const password = passInput.value.trim()
+  console.log(email, password)
+
+  authWithEmailAndPass(email, password).then((token) => console.log(token))
+
+  emailInput.value = ''
+  passInput.value = ''
 }

@@ -3,9 +3,7 @@ export class Post {
     this.img = img
     this.text = text
   }
-  
 }
-
 
 // export class Post {
 //   static create(post) {
