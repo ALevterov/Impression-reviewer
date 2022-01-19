@@ -1,7 +1,7 @@
-import { Post } from './post'
+import { Post } from '../essenses/post'
 import { PostPage } from './addpost'
-import { setActiveNavLink } from './setActiveLink'
-export { Post } from './post'
+import { loadContent } from '../additional/loadfiles'
+import { setActiveNavLink } from '../additional/setActiveLink'
 export function drinksPageHandler(event) {
   let clientheight = window.innerHeight
   const drinkPosts = ''
@@ -52,4 +52,5 @@ export function drinksPageHandler(event) {
   } else {
     setActiveNavLink(event.target.parentNode.id)
   }
+  loadContent('drinkPosts')
 }

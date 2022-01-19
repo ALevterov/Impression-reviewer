@@ -2,28 +2,10 @@ import './styles/styles.css'
 import './styles/drinks.css'
 import './styles/food.css'
 import './styles/addposts.css'
-import './user'
-import { authFormHandler } from './auth'
-import { drinksPageHandler } from './drinkspage'
-import { foodPageHandler } from './foodpage'
-
-import firebase from 'firebase/compat/app'
-import { getStorage } from 'firebase/storage'
-import { appendChild } from 'domutils'
-// import { getAnalytics } from "firebase/analytics";
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyBd47pDOwXOBjmLwWclzincO3mpTpkSYGk',
-  authDomain: 'mealreviewer.firebaseapp.com',
-  projectId: 'mealreviewer',
-  storageBucket: 'mealreviewer.appspot.com',
-  messagingSenderId: '509649353294',
-  appId: '1:509649353294:web:385fc8786713e6bf9ba11f',
-  measurementId: 'G-XX9ML2K4FV',
-}
-const app = firebase.initializeApp(firebaseConfig)
-
-const storage = getStorage(app)
+import './essenses/user'
+import { authFormHandler } from './essenses/auth'
+import { drinksPageHandler } from './pages/drinkspage'
+import { foodPageHandler } from './pages/foodpage'
 
 const myModal = document.getElementById('myModal')
 

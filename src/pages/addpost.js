@@ -1,6 +1,7 @@
 import firebase from 'firebase/compat/app'
 import { getStorage, ref, uploadBytes } from 'firebase/storage'
-import { appendChild } from 'domutils'
+import { Post } from '../essenses/post'
+// import { appendChild } from 'domutils'
 // import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
@@ -15,7 +16,7 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig)
 
 const storage = getStorage(app)
-import { Post } from './post'
+
 export function PostPage() {
   const mainBody = document.querySelector('.main__body')
   let HTML = `

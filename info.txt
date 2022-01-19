@@ -1,2 +1,0 @@
-установить node
-установить webpack, webpack-cli глобально
