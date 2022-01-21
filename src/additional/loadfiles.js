@@ -22,24 +22,32 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig)
 
 const storage = getStorage(app)
+console.log('storage!!: ', storage)
 
-async function loadPostContent(section, post, fileContainer) {
+export async function loadPostContent(section, post) {
+  let fileContainer = []
   const rootRef = ref(storage, `${section}`)
   const sectionRef = ref(
     storage,
     `${section}/${post}//xps-kLfkVa_4aXM-unsplash.jpg`
   )
   /// ==============
-  listAll(rootRef).then((rootPrefix) => {
+  await listAll(rootRef).then((rootPrefix) => {
     rootPrefix.prefixes.forEach((pref) => {
+      let tempObj
       listAll(pref).then((post) => {
         //в post содержатся файлы поста
-
+        tempObj = {}
         post.items.forEach((item, index) => {
           getDownloadURL(item)
-            .then((file) => {
-              //file это скачанный файл из БД
-              fileContainer.push(file)
+            .then((url) => {
+              if (url.match('description')) {
+                tempObj.description = url
+              } else if (url.match(/(jpg)|(jpeg)|(png)|(gif)/)) {
+                tempObj.img = url
+              } else {
+                tempObj.header = url
+              }
             })
             .catch((error) => {
               // A full list of error codes is available at
@@ -67,7 +75,17 @@ async function loadPostContent(section, post, fileContainer) {
             })
         })
       })
+      fileContainer.push(tempObj)
+      console.log(fileContainer.length)
+      // const xhr = new XMLHttpRequest()
+      //         xhr.responseType = 'blob'
+      //         xhr.onload = (event) => {
+      //           const blob = xhr.response
+
+      //         }
+      //         xhr.open('GET', url)
+      //         xhr.send()
     })
   })
+  return fileContainer
 }
-module.exports.loadPostContent = loadPostContent

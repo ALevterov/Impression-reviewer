@@ -38,7 +38,6 @@ export function drinksPageHandler(event) {
   mainBody.innerHTML = HTML
   const createBtn = mainBody.querySelector('#create')
   createBtn.addEventListener('click', PostPage)
-  const fileContainer = []
   if (event.target.id) {
     setActiveNavLink(event.target.id)
   } else {
@@ -62,6 +61,6 @@ export function drinksPageHandler(event) {
 		`
     container.appendChild(newPost)
   }
-  await loadPostContent('drinkPosts', 'new cool post', fileContainer)
+  let fileContainer = loadPostContent('drinkPosts', 'new cool post')
   console.log(fileContainer)
 }

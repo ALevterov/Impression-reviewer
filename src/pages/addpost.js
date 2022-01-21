@@ -34,7 +34,7 @@ export function PostPage() {
 								required
               />
 					<label for="formFile" class="form-label">Загрузить картинку</label>
-  			<input class="form-control" type="file" id="formFile" accept=".png, .jpg, .jpeg, .png, .gif">
+  			<input class="form-control" type="file" id="formFile" accept=".png, .jpg, .jpeg, .gif">
 			  <div class="image-container"></div>
 				<label for="textarea" class="form-label">Ваш отзыв о продукте</label>
 				<textarea class="form-control" id="textarea" rows="3"></textarea>
