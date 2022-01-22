@@ -77,14 +77,31 @@ export function PostPage() {
     const imageRef = ref(storage, `${folderName}/${file.name}`)
     const textRef = ref(storage, `${folderName}/description`)
     const headerRef = ref(storage, `${folderName}/${header}`)
-
-    uploadBytes(imageRef, file).then((snapshot) => {
+    const imgMetaData = {
+      type: 'image',
+      topic: `drinksPosts`,
+      post: `${folderName}`,
+      name: `${file.name}`,
+    }
+    const descriptionMetaData = {
+      type: 'description',
+      topic: `drinksPosts`,
+      post: `${folderName}`,
+      name: `${file.name}`,
+    }
+    const headerMetaData = {
+      type: 'header',
+      topic: `drinksPosts`,
+      post: `${folderName}`,
+      name: `${file.name}`,
+    }
+    uploadBytes(imageRef, file, imgMetaData).then((snapshot) => {
       console.log(snapshot)
     })
-    uploadBytes(textRef, text).then((snapshot) => {
+    uploadBytes(textRef, text, descriptionMetaData).then((snapshot) => {
       console.log(snapshot)
     })
-    uploadBytes(headerRef, header).then((snapshot) => {
+    uploadBytes(headerRef, header, headerMetaData).then((snapshot) => {
       console.log(snapshot)
     })
   }

@@ -61,6 +61,7 @@ export function drinksPageHandler(event) {
 		`
     container.appendChild(newPost)
   }
-  let fileContainer = loadPostContent('drinkPosts', 'new cool post')
-  console.log(fileContainer)
+  let fileContainer = []
+  loadPostContent('drinkPosts', 'new cool post', fileContainer)
+  console.log('fileContainer:', fileContainer)
 }

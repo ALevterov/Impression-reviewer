@@ -4,6 +4,7 @@ import {
   ref,
   uploadBytes,
   getDownloadURL,
+  getMetadata,
   listAll,
 } from 'firebase/storage'
 import { Post } from '../essenses/post'
@@ -22,10 +23,8 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig)
 
 const storage = getStorage(app)
-console.log('storage!!: ', storage)
 
-export async function loadPostContent(section, post) {
-  let fileContainer = []
+export async function loadPostContent(section, post, fileContainer) {
   const rootRef = ref(storage, `${section}`)
   const sectionRef = ref(
     storage,
@@ -37,18 +36,14 @@ export async function loadPostContent(section, post) {
       let tempObj
       listAll(pref).then((post) => {
         //в post содержатся файлы поста
-        tempObj = {}
-        post.items.forEach((item, index) => {
+        //tempObj = {}
+        post.items.forEach((item) => {
+          getMetadata(item).then((metadata) => {
+            console.log(metadata)
+            fileContainer.push(metadata)
+          })
           getDownloadURL(item)
-            .then((url) => {
-              if (url.match('description')) {
-                tempObj.description = url
-              } else if (url.match(/(jpg)|(jpeg)|(png)|(gif)/)) {
-                tempObj.img = url
-              } else {
-                tempObj.header = url
-              }
-            })
+            .then((url) => {})
             .catch((error) => {
               // A full list of error codes is available at
               // https://firebase.google.com/docs/storage/web/handle-errors
@@ -75,8 +70,8 @@ export async function loadPostContent(section, post) {
             })
         })
       })
-      fileContainer.push(tempObj)
-      console.log(fileContainer.length)
+      // fileContainer.push(tempObj)
+
       // const xhr = new XMLHttpRequest()
       //         xhr.responseType = 'blob'
       //         xhr.onload = (event) => {
@@ -87,5 +82,4 @@ export async function loadPostContent(section, post) {
       //         xhr.send()
     })
   })
-  return fileContainer
 }
