@@ -62,6 +62,12 @@ export function drinksPageHandler(event) {
     container.appendChild(newPost)
   }
   let fileContainer = []
-  loadPostContent('drinkPosts', 'new cool post', fileContainer)
+  async function matUmerla() {
+    await loadPostContent('drinkPosts', 'new cool post', fileContainer)
+  }
+  matUmerla()
+
+  // loadPostContent('drinkPosts', 'new cool post', fileContainer)
+  const postContainer = mainBody.querySelector('#post-container')
   console.log('fileContainer:', fileContainer)
 }

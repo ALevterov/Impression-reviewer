@@ -39,11 +39,20 @@ export async function loadPostContent(section, post, fileContainer) {
         //tempObj = {}
         post.items.forEach((item) => {
           getMetadata(item).then((metadata) => {
-            console.log(metadata)
-            fileContainer.push(metadata)
+            // fileContainer.push(metadata)
           })
           getDownloadURL(item)
-            .then((url) => {})
+            .then((url) => {
+              // console.log(url)
+              // url += '?auth=true'
+              const xhr = new XMLHttpRequest()
+              xhr.responseType = 'blob'
+              xhr.onload = (event) => {
+                fileContainer.push(xhr.response)
+              }
+              xhr.open('GET', url)
+              xhr.send()
+            })
             .catch((error) => {
               // A full list of error codes is available at
               // https://firebase.google.com/docs/storage/web/handle-errors
@@ -71,15 +80,6 @@ export async function loadPostContent(section, post, fileContainer) {
         })
       })
       // fileContainer.push(tempObj)
-
-      // const xhr = new XMLHttpRequest()
-      //         xhr.responseType = 'blob'
-      //         xhr.onload = (event) => {
-      //           const blob = xhr.response
-
-      //         }
-      //         xhr.open('GET', url)
-      //         xhr.send()
     })
   })
 }

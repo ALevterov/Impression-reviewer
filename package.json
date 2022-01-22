@@ -41,6 +41,7 @@
     "colorette": "^2.0.16",
     "commander": "^2.20.3",
     "concat-map": "^0.0.1",
+    "cors": "^2.8.5",
     "cross-spawn": "^7.0.3",
     "css-select": "^4.2.1",
     "css-what": "^5.1.0",
