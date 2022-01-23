@@ -5,7 +5,7 @@ import {
   uploadBytes,
   getDownloadURL,
   getMetadata,
-  listAll,
+  list,
 } from 'firebase/storage'
 import { Post } from '../essenses/post'
 // import { appendChild } from 'domutils'
@@ -24,62 +24,38 @@ const app = firebase.initializeApp(firebaseConfig)
 
 const storage = getStorage(app)
 
-export async function loadPostContent(section, post, fileContainer) {
+export async function loadPostContent(section, fileContainer) {
+  let postDataContainer = []
+  let promiseArray = []
   const rootRef = ref(storage, `${section}`)
-  const sectionRef = ref(
-    storage,
-    `${section}/${post}//xps-kLfkVa_4aXM-unsplash.jpg`
-  )
-  /// ==============
-  await listAll(rootRef).then((rootPrefix) => {
-    rootPrefix.prefixes.forEach((pref) => {
-      let tempObj
-      listAll(pref).then((post) => {
-        //в post содержатся файлы поста
-        //tempObj = {}
-        post.items.forEach((item) => {
-          getMetadata(item).then((metadata) => {
-            // fileContainer.push(metadata)
-          })
-          getDownloadURL(item)
-            .then((url) => {
-              // console.log(url)
-              // url += '?auth=true'
-              const xhr = new XMLHttpRequest()
-              xhr.responseType = 'blob'
-              xhr.onload = (event) => {
-                fileContainer.push(xhr.response)
-              }
-              xhr.open('GET', url)
-              xhr.send()
-            })
-            .catch((error) => {
-              // A full list of error codes is available at
-              // https://firebase.google.com/docs/storage/web/handle-errors
-              switch (error.code) {
-                case 'storage/object-not-found':
-                  console.log('storage/object-not-found')
-                  break
-                case 'storage/unauthorized':
-                  console.log('storage/unauthorized')
-                  // User doesn't have permission to access the object
-                  break
-                case 'storage/canceled':
-                  console.log('storage/canceled')
-                  // User canceled the upload
-                  break
-
-                // ...
-
-                case 'storage/unknown':
-                  console.log('storage/unknown')
-                  // Unknown error occurred, inspect the server response
-                  break
-              }
-            })
+  list(rootRef).then((postPrefixesContainer) => {
+    postPrefixesContainer.prefixes.forEach((prefix) => {
+      promiseArray.push(list(prefix))
+    })
+    Promise.all(promiseArray).then((itemContainer) => {
+      promiseArray = []
+      let downloadPromiseArray = []
+      let fileArray = []
+      itemContainer.forEach((filesContainer) => {
+        filesContainer.items.forEach((file) => {
+          fileArray.push(file)
+          // getDownloadURL(file).then((data) => {
+          //   console.log(file, '  ', data)
+          // })
+          promiseArray.push(getMetadata(file))
+          // downloadPromiseArray.push(getDownloadURL(file))
         })
       })
-      // fileContainer.push(tempObj)
+
+      Promise.all(promiseArray).then((values) => {
+        values.forEach((fileMetadata) => {
+          const url = fileMetadata.customMetadata.ref
+
+          fileArray.forEach((file) => {
+            console.log(url.match(file.fullPath))
+          })
+        })
+      })
     })
   })
 }

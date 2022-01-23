@@ -51,8 +51,7 @@ export function PostPage() {
   const imageContainer = mainBody.querySelector('.image-container')
   const postHeader = mainBody.querySelector('#post-header')
 
-  let files = [],
-    text
+  let files = []
   function inputChangeHandler(event) {
     if (fileInput.files.length !== 0) files = Array.from(fileInput.files)
 
@@ -70,54 +69,53 @@ export function PostPage() {
       reader.readAsDataURL(file)
     })
   }
-  function onUpload(file, text) {
-    const header = postHeader.value
+  function onUpload(image, description, header) {
     const folderName = `drinkPosts/${header}`
     const folderRef = ref(storage, folderName)
-    const imageRef = ref(storage, `${folderName}/${file.name}`)
-    const textRef = ref(storage, `${folderName}/description`)
+    const imageRef = ref(storage, `${folderName}/${image.name}`)
+    const descriptionRef = ref(storage, `${folderName}/description`)
     const headerRef = ref(storage, `${folderName}/${header}`)
     const imgMetaData = {
       customMetadata: {
         topic: `drinksPosts`,
         type: 'image',
-        post: `${folderName}`,
-        name: `${file.name}`,
+        post: `${header}`,
+        ref: `${imageRef}`,
       },
     }
     const descriptionMetaData = {
       customMetadata: {
         type: 'description',
         topic: `drinksPosts`,
-        post: `${folderName}`,
-        name: `${file.name}`,
+        post: `${header}`,
+        ref: `${descriptionRef}`,
       },
     }
     const headerMetaData = {
       customMetadata: {
         type: 'header',
         topic: `drinksPosts`,
-        post: `${folderName}`,
-        name: `${file.name}`,
+        post: `${header}`,
+        ref: `${headerRef}`,
       },
     }
-    uploadBytes(imageRef, file, imgMetaData)
-      .then((snapshot) => {
-        console.log(snapshot)
-      })
-      .catch((e) => console.log('sosi huy', e))
-    uploadBytes(textRef, text, descriptionMetaData).then((snapshot) => {
+    uploadBytes(imageRef, image, imgMetaData).then((snapshot) => {
       console.log(snapshot)
     })
+    uploadBytes(descriptionRef, description, descriptionMetaData).then(
+      (snapshot) => {
+        console.log(snapshot)
+      }
+    )
     uploadBytes(headerRef, header, headerMetaData).then((snapshot) => {
       console.log(snapshot)
     })
   }
   fileInput.addEventListener('change', inputChangeHandler)
   function submitHandler() {
-    if (textInput.value) text = textInput.value
-
-    onUpload(files[0], text)
+    const description = textInput.value
+    const header = postHeader.value
+    onUpload(files[0], description, header)
   }
   subBtn.addEventListener('click', submitHandler)
 }
