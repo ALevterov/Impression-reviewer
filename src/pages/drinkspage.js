@@ -27,29 +27,14 @@ export function drinksPageHandler(event) {
   const mainBody = document.querySelector('.main__body')
   mainBody.innerHTML = HTML
   const createBtn = mainBody.querySelector('#create')
-  createBtn.addEventListener('click', PostPage)
+  createBtn.addEventListener('click', (event) => {
+    event.preventDefault()
+    PostPage()
+  })
   if (event.target.id) {
     setActiveNavLink(event.target.id)
   } else {
     setActiveNavLink(event.target.parentNode.id)
-  }
-  function showContent(selector) {
-    const container = document.getElementById(`${selector}`)
-
-    const newPost = document.createElement('div')
-    newPost.classList.add('post')
-
-    newPost.innerHTML = `
-		<div class="post-header>${newPostFiles[0]}</div>
-		<img src="${newPostFiles[1]}">
-		<div class="post-text">
-			${newPostFiles[2]}
-		</div>
-		<div class="about-author">
-
-		</div>
-		`
-    container.appendChild(newPost)
   }
 
   const postContainer = mainBody.querySelector('#post-container')

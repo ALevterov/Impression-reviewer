@@ -4,6 +4,8 @@ export function blobTo(File) {
     image: blobToImage,
     header: blobToString,
     description: blobToString,
+    plus: blobToString,
+    minus: blobToString,
   }
   function blobToImage() {
     const src = URL.createObjectURL(

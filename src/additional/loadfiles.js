@@ -111,7 +111,7 @@ export function loadPostContent(section, postContainer) {
                 postsStructuredContainer[topic]
               )) {
                 const topicFolder = postsStructuredContainer[topic]
-                let postHTML
+                console.log(postsStructuredContainer)
                 let img, header, description
                 for (let fileKey of Object.keys(topicFolder[postKey])) {
                   const postFile = topicFolder[postKey][fileKey]

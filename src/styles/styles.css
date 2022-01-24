@@ -19,9 +19,6 @@ button.btn {
 .modal {
   background: rgba(0, 0, 0, 0.4);
 }
-.form-label {
-  margin-top: 1rem;
-}
 .form-label.no-margin {
   margin-top: 0;
 }
@@ -31,4 +28,7 @@ button.btn {
   left: 0;
   width: 100%;
   z-index: 1000;
+}
+select:hover {
+  cursor: pointer;
 }

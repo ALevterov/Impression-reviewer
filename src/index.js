@@ -17,25 +17,34 @@ let drinksId = 0
 function showModal() {
   myModal.style.display = 'block'
 }
-signInBtn.addEventListener('click', showModal)
+signInBtn.addEventListener('click', (event) => {
+  event.preventDefault()
+  showModal()
+})
 
 myModal.addEventListener('click', (event) => {
+  event.preventDefault()
   console.log(event.target.dataset['data-closable'])
   if (event.target.dataset['closable']) {
     myModal.style.display = 'none'
   }
 })
 
-signIn.addEventListener('click', (event) => authFormHandler(event))
+signIn.addEventListener('click', (event) => {
+  event.preventDefault()
+  authFormHandler(event)
+})
 
 const drinksPage = document.getElementById('drinks')
 
 const eatPage = document.getElementById('food')
 
 drinksPage.addEventListener('click', (event) => {
+  event.preventDefault()
   drinksPageHandler(event)
 })
 
 eatPage.addEventListener('click', (event) => {
+  event.preventDefault()
   foodPageHandler(event)
 })
