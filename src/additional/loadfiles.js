@@ -106,7 +106,24 @@ export function loadPostContent(section) {
                 }
               }
               // теперь в поле file содержится Uint8Array! то есть сам файл
-              console.log(postsStructuredContainer)
+              // console.log(postsStructuredContainer)
+              for (let postKey of Object.keys(
+                postsStructuredContainer[topic]
+              )) {
+                const topicFolder = postsStructuredContainer[topic]
+                let postHTML
+                let img = ``
+                for (let fileKey of Object.keys(topicFolder[postKey])) {
+                  const postFile = topicFolder[postKey][fileKey]
+                  if (postFile.type === 'image') {
+                    console.log('image!')
+                    URL.createObjectURL(
+                      new Blob([postFile.file.buffer], { type: 'image/png' })
+                    )
+                    // img = `<img src="${}">`
+                  }
+                }
+              }
             })
           })
         })
