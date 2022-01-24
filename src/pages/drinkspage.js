@@ -61,9 +61,7 @@ export function drinksPageHandler(event) {
 		`
     container.appendChild(newPost)
   }
-  let fileContainer = []
 
-  loadPostContent('drinkPosts', fileContainer)
   const postContainer = mainBody.querySelector('#post-container')
-  // console.log('fileContainer:', fileContainer)
+  loadPostContent('drinkPosts', postContainer)
 }
