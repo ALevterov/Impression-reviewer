@@ -7,9 +7,9 @@ import {
   getMetadata,
   list,
 } from 'firebase/storage'
-import { Post } from '../essenses/post'
-// import { appendChild } from 'domutils'
-// import { getAnalytics } from "firebase/analytics";
+import { blobTo } from '../additional/blobTo'
+import { createPostItem } from '../additional/createPost'
+// import { Post } from '../essenses/post'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBd47pDOwXOBjmLwWclzincO3mpTpkSYGk',
@@ -24,7 +24,7 @@ const app = firebase.initializeApp(firebaseConfig)
 
 const storage = getStorage(app)
 
-export function loadPostContent(section) {
+export function loadPostContent(section, postContainer) {
   let postDataContainer = []
   let promiseArray = []
   const rootRef = ref(storage, `${section}`)
@@ -112,17 +112,28 @@ export function loadPostContent(section) {
               )) {
                 const topicFolder = postsStructuredContainer[topic]
                 let postHTML
-                let img = ``
+                let img, header, description
                 for (let fileKey of Object.keys(topicFolder[postKey])) {
                   const postFile = topicFolder[postKey][fileKey]
-                  if (postFile.type === 'image') {
-                    console.log('image!')
-                    URL.createObjectURL(
-                      new Blob([postFile.file.buffer], { type: 'image/png' })
-                    )
-                    // img = `<img src="${}">`
+                  switch (postFile.type) {
+                    case 'image':
+                      img = blobTo(postFile)
+
+                      break
+                    case 'header':
+                      header = blobTo(postFile)
+
+                      break
+                    case 'description':
+                      description = blobTo(postFile)
+
+                      break
                   }
                 }
+                postContainer.insertAdjacentHTML(
+                  'beforeend',
+                  createPostItem(img, header, description)
+                )
               }
             })
           })

@@ -1,5 +1,5 @@
 import firebase from 'firebase/compat/app'
-import { getStorage, ref, uploadBytes } from 'firebase/storage'
+import { getStorage, ref, uploadBytes, uploadString } from 'firebase/storage'
 import { Post } from '../essenses/post'
 // import { appendChild } from 'domutils'
 // import { getAnalytics } from "firebase/analytics";
@@ -51,23 +51,21 @@ export function PostPage() {
   const imageContainer = mainBody.querySelector('.image-container')
   const postHeader = mainBody.querySelector('#post-header')
 
-  let files = []
+  let image
   function inputChangeHandler(event) {
-    if (fileInput.files.length !== 0) files = Array.from(fileInput.files)
+    if (fileInput.files.length !== 0) image = fileInput.files[0]
 
-    files.forEach((file) => {
-      if (!file.type.match('image')) return
+    if (!image.type.match('image')) return
 
-      const reader = new FileReader()
+    const reader = new FileReader()
 
-      reader.onload = (ev) => {
-        const image = ev.target.result
-        const img = document.createElement('img')
-        img.src = image
-        imageContainer.insertAdjacentElement('afterbegin', img)
-      }
-      reader.readAsDataURL(file)
-    })
+    reader.onload = (ev) => {
+      const shownImage = ev.target.result
+      const img = document.createElement('img')
+      img.src = shownImage
+      imageContainer.insertAdjacentElement('afterbegin', img)
+    }
+    reader.readAsDataURL(image)
   }
   function onUpload(image, description, header) {
     const folderName = `drinkPosts/${header}`
@@ -99,23 +97,25 @@ export function PostPage() {
         ref: `${headerRef}`,
       },
     }
+    const headerBytes = new TextEncoder().encode(header)
+    const descriptionBytes = new TextEncoder().encode(description)
     uploadBytes(imageRef, image, imgMetaData).then((snapshot) => {
-      console.log(snapshot)
+      // console.log(snapshot)
     })
-    uploadBytes(descriptionRef, description, descriptionMetaData).then(
+    uploadBytes(descriptionRef, descriptionBytes, descriptionMetaData).then(
       (snapshot) => {
-        console.log(snapshot)
+        // console.log(snapshot)
       }
     )
-    uploadBytes(headerRef, header, headerMetaData).then((snapshot) => {
-      console.log(snapshot)
+    uploadBytes(headerRef, headerBytes, headerMetaData).then((snapshot) => {
+      // console.log(snapshot)
     })
   }
   fileInput.addEventListener('change', inputChangeHandler)
   function submitHandler() {
     const description = textInput.value
     const header = postHeader.value
-    onUpload(files[0], description, header)
+    onUpload(image, description, header)
   }
   subBtn.addEventListener('click', submitHandler)
 }
