@@ -1,6 +1,5 @@
 import './styles/styles.css'
 import './styles/drinks.css'
-import './styles/food.css'
 import './styles/addposts.css'
 import './essenses/user'
 import { authFormHandler } from './essenses/auth'

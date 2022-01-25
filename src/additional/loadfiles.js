@@ -111,8 +111,7 @@ export function loadPostContent(section, postContainer) {
                 postsStructuredContainer[topic]
               )) {
                 const topicFolder = postsStructuredContainer[topic]
-                console.log(postsStructuredContainer)
-                let img, header, description
+                let img, header, description, plus, minus, date, starsCount
                 for (let fileKey of Object.keys(topicFolder[postKey])) {
                   const postFile = topicFolder[postKey][fileKey]
                   switch (postFile.type) {
@@ -122,17 +121,35 @@ export function loadPostContent(section, postContainer) {
                       break
                     case 'header':
                       header = blobTo(postFile)
+                      starsCount = +postFile.starsCount
+                      date = +postFile.date
 
                       break
                     case 'description':
                       description = blobTo(postFile)
 
                       break
+                    case 'plus':
+                      plus = blobTo(postFile)
+
+                      break
+                    case 'minus':
+                      minus = blobTo(postFile)
+
+                      break
                   }
                 }
                 postContainer.insertAdjacentHTML(
                   'beforeend',
-                  createPostItem(img, header, description)
+                  createPostItem(
+                    img,
+                    header,
+                    description,
+                    plus,
+                    minus,
+                    starsCount,
+                    date
+                  )
                 )
               }
             })
