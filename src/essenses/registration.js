@@ -2,7 +2,7 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { closeModal } from '../additional/closeModal'
 import { onAuthStateChanged } from 'firebase/auth'
 import { logInHandler } from '../additional/logInHandler'
-
+import { signOutHandler } from '../additional/signOutHandler'
 const auth = getAuth()
 export function createUserHandler(event, modal) {
   event.preventDefault()
@@ -22,7 +22,7 @@ export function createUserHandler(event, modal) {
           console.log('User is loggedIn now!')
           logInHandler()
         } else {
-          console.log('User is loggedOut now!')
+          signOutHandler()
         }
       })
 

@@ -2,7 +2,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { closeModal } from '../additional/closeModal'
 import { onAuthStateChanged } from 'firebase/auth'
 import { logInHandler } from '../additional/logInHandler'
-
+import { signOutHandler } from '../additional/signOutHandler'
 export function authFormHandler(event, modal) {
   event.preventDefault()
   const emailInput = modal.querySelector('#email-input')
@@ -21,7 +21,7 @@ export function authFormHandler(event, modal) {
           console.log('User is loggedIn now!')
           logInHandler()
         } else {
-          console.log('User is loggedOut now!')
+          signOutHandler()
         }
       })
 
