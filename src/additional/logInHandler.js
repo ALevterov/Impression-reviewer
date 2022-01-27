@@ -4,12 +4,12 @@ export function logInHandler() {
   const signInBtn = document.getElementById('signInBtn')
 
   signUpBtn.removeEventListener('click', listeners.signUpBtn)
-  signUpBtn.addEventListener('click', listeners.myProfile)
+  signUpBtn.addEventListener('click', listeners.signOutHandler)
   signUpBtn.id = 'logOutBtn'
-  signUpBtn.innerHTML = 'Мой профиль'
+  signUpBtn.innerHTML = 'Выйти'
 
   signInBtn.removeEventListener('click', listeners.signInBtn)
-  signInBtn.addEventListener('click', listeners.signOutHandler)
+  signInBtn.addEventListener('click', listeners.myProfile)
   signInBtn.id = 'myProfileBtn'
-  signInBtn.innerHTML = 'Выйти'
+  signInBtn.innerHTML = 'Мой профиль'
 }
