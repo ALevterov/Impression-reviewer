@@ -2,48 +2,28 @@ import './styles/styles.css'
 import './styles/drinks.css'
 import './styles/addposts.css'
 import './essenses/user'
-import { authFormHandler } from './essenses/auth'
 import { drinksPageHandler } from './pages/drinkspage'
-import { foodPageHandler } from './pages/foodpage'
+import { listeners } from './additional/eventListeners'
 
-const myModal = document.getElementById('myModal')
-
-const signInBtn = document.getElementById('signIn')
-
-const signIn = document.getElementById('enter')
-
-let drinksId = 0
-function showModal() {
-  myModal.style.display = 'block'
-}
-signInBtn.addEventListener('click', (event) => {
-  event.preventDefault()
-  showModal()
-})
-
-myModal.addEventListener('click', (event) => {
-  event.preventDefault()
-  console.log(event.target.dataset['data-closable'])
-  if (event.target.dataset['closable']) {
-    myModal.style.display = 'none'
-  }
-})
-
-signIn.addEventListener('click', (event) => {
-  event.preventDefault()
-  authFormHandler(event)
-})
-
+// signIn
+const signInModal = document.getElementById('signInModal')
+const signInBtn = document.getElementById('signInBtn')
+const enterBtn = document.getElementById('enterBtn')
+// signUp
+const signUpModal = document.getElementById('signUpModal')
+const signUpBtn = document.getElementById('signUpBtn')
+const createUserBtn = document.getElementById('createUser')
+// pages
 const drinksPage = document.getElementById('drinks')
 
-const eatPage = document.getElementById('food')
+signInBtn.addEventListener('click', listeners.signInBtn)
+signInModal.addEventListener('click', listeners.signInModal)
 
-drinksPage.addEventListener('click', (event) => {
-  event.preventDefault()
-  drinksPageHandler(event)
-})
+signUpBtn.addEventListener('click', listeners.signUpBtn)
+signUpModal.addEventListener('click', listeners.signUpModal)
 
-eatPage.addEventListener('click', (event) => {
-  event.preventDefault()
-  foodPageHandler(event)
-})
+enterBtn.addEventListener('click', listeners.enterBtn)
+
+createUserBtn.addEventListener('click', listeners.createUserBtn)
+
+drinksPage.addEventListener('click', (event) => drinksPageHandler(event))

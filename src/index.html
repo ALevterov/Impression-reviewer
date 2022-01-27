@@ -25,7 +25,9 @@
   </head>
   <body>
     <section class="header__section">
-      <div class="modal" id="myModal" tabindex="-1" data-closable="true">
+      <!-- signIn Modal  -->
+
+      <div class="modal" id="signInModal" tabindex="-1" data-closable="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -48,8 +50,8 @@
                 id="email-input"
                 placeholder="name@example.com"
               />
-              <label for="password-input" class="form-label">Password:</label>
-              <input type="email" class="form-control" id="password-input" />
+              <label for="password-input" class="form-label">Пароль:</label>
+              <input type="password" class="form-control" id="password-input" />
             </div>
             <div class="modal-footer">
               <button
@@ -60,13 +62,60 @@
               >
                 Закрыть
               </button>
-              <button type="button" class="btn btn-primary" id="enter">
+              <button type="button" class="btn btn-primary" id="enterBtn">
                 Войти
               </button>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- signUp Modal  -->
+
+      <div class="modal" id="signUpModal" tabindex="-1" data-closable="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Регистрация</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                data-closable="true"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <label for="email-input" class="form-label no-margin"
+                >Email:</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="email-input"
+                placeholder="name@example.com"
+              />
+              <label for="password-input" class="form-label">Пароль:</label>
+              <input type="password" class="form-control" id="password-input" />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+                data-closable="true"
+              >
+                Закрыть
+              </button>
+              <button type="button" class="btn btn-success" id="createUser">
+                Зарегистрироваться
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- header -->
 
       <div class="header">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -119,10 +168,18 @@
                   </ul>
                 </li>
               </ul>
-              <button class="btn btn-outline-success" id="signIn" type="submit">
+              <button
+                class="btn btn-outline-success"
+                id="signInBtn"
+                type="submit"
+              >
                 Вход
               </button>
-              <button class="btn btn-outline-primary" type="submit">
+              <button
+                class="btn btn-outline-primary"
+                type="submit"
+                id="signUpBtn"
+              >
                 Регистрация
               </button>
             </div>

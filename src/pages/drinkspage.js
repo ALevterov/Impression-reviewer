@@ -2,6 +2,7 @@ import { Post } from '../essenses/post'
 import { PostPage } from './addpost'
 import { loadPostContent } from '../additional/loadfiles'
 import { setActiveNavLink } from '../additional/setActiveLink'
+
 export function drinksPageHandler(event) {
   let clientheight = window.innerHeight
   const drinkPosts = ''
