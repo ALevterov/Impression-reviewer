@@ -1,37 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: 'Kumbh Sans', sans-serif;
+}
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
-p {
-  margin-bottom: 0;
-}
-button.btn {
-  margin-right: 1rem;
-}
-.main__body {
-  margin-top: 56px;
-  width: 100%;
-  height: calc(100vh - 56px);
-  background: no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-.modal {
-  background: rgba(0, 0, 0, 0.4);
-}
-.form-label.no-margin {
-  margin-top: 0;
-}
 .header {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  z-index: 1000;
+  right: 0;
+  height: 130px;
+  z-index: 9000;
 }
-select:hover {
+.header > h1 {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 70px;
+  width: 270px;
+}
+.header > h1 > a {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+  font-size: 2.2rem;
+  padding: 20px;
+  display: inline-block;
+}
+.sub-list {
+  position: absolute;
+  top: 44px;
+  left: 35px;
+}
+ul.sub-list-depth {
+  list-style-type: none;
+  font-size: 1.8rem;
+}
+ul.sub-list-depth > li {
+  display: inline-block;
+  padding: 0 0.78vw;
+  transition: all 0.3s ease-in-out;
+}
+ul.sub-list-depth > li:hover {
+  color: #49c5b6;
   cursor: pointer;
+}
+ul.sub-list-depth > li::after {
+  content: '';
+  display: block;
+  background: #49c5b6;
+  width: 0%;
+  height: 1px;
+  transition: all 0.3s ease-in-out;
+}
+ul.sub-list-depth > li:hover::after {
+  width: 100%;
+}
+ul.sub-list-depth > li > i {
+  position: relative;
+  top: -1px;
+  font-size: 1rem;
+}
+.login-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 240px;
+  position: absolute;
+  top: 38px;
+  right: 47px;
+  font-size: 1.6rem;
+  letter-spacing: 0;
+}
+.login-buttons > button.btn {
+  font-size: 1.6rem;
+  border: 1px solid #000;
+  border-radius: 36px;
+  background-color: transparent;
+  padding: 8px 20px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+.login-buttons > button.btn:hover {
+  border-color: #49c5b6;
+  color: #49c5b6;
+  background-color: transparent;
+}
+.main__body {
+  background-image: url('../images/background.jpg');
 }
