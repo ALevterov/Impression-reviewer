@@ -12,7 +12,10 @@ const enterBtn = document.getElementById('enterBtn')
 // signUp
 const signUpModal = document.getElementById('signUpModal')
 const signUpBtn = document.getElementById('signUpBtn')
-const createUserBtn = document.getElementById('createUser')
+const createUserBtn = document.getElementById('createUserBtn')
+
+const toSignUpBtn = document.getElementById('toSignUpBtn')
+const fromSignInToSignUpBtn = document.getElementById('fromSignInToSignUp')
 // pages
 const drinksPage = document.getElementById('drinks')
 
@@ -25,5 +28,7 @@ signUpModal.addEventListener('click', listeners.signUpModal)
 enterBtn.addEventListener('click', listeners.enterBtn)
 
 createUserBtn.addEventListener('click', listeners.createUserBtn)
+
+fromSignInToSignUpBtn.addEventListener('click', listeners.fromSignInToSignUp)
 
 drinksPage.addEventListener('click', (event) => drinksPageHandler(event))

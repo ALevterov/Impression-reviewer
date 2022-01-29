@@ -1,8 +1,8 @@
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
-import { closeModal } from '../additional/closeModal'
+import { closeModal } from '../modal/closeModal'
 import { onAuthStateChanged } from 'firebase/auth'
-import { logInHandler } from '../additional/logInHandler'
-import { signOutHandler } from '../additional/signOutHandler'
+import { logInHandler } from '../signIn&Up/logInHandler'
+import { signOutHandler } from '../signIn&Up/signOutHandler'
 const auth = getAuth()
 export function createUserHandler(event, modal) {
   event.preventDefault()

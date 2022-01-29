@@ -45,25 +45,59 @@ export function createPostItem(
     }
     return string
   }
+  // return `
+  // <div class="post">
+  // 			<h1 class="post-header">${header}</h1>
+  // 			<div class="post-date">${date}</div>
+  // 			<div class="post-stars">${createStarString(starsCount)}</div>
+  // 			<div class="post-plus">
+  // 			<p> ${plusSvg} Достоинства: <p>
+  // 			<p> ${plus}<p>
+  // 			</div>
+  // 			<div class="post-minus">
+  // 			<p> ${minusSvg} Недостатки <p>
+  // 			<p> ${minus}<p>
+  // 			</div>
+  // 			<div class="post-image">${img}</div>
+  // 			<div class="post-description">
+  // 				${description}
+  // 			</div>
+
+  // 		</div>
+  // 	</div>
+  // `
   return `
-	<div class="post">
-				<h1 class="post-header">${header}</h1>
-				<div class="post-date">${date}</div>
-				<div class="post-stars">${createStarString(starsCount)}</div>
-				<div class="post-plus">
-				<p> ${plusSvg} Достоинства: <p>
-				<p> ${plus}<p>
-				</div>
-				<div class="post-minus">
-				<p> ${minusSvg} Недостатки <p>
-				<p> ${minus}<p>
-				</div>
-				<div class="post-image">${img}</div>
-				<div class="post-description">
-					${description}
-				</div>
-				
+<div class="card">
+	<div class="thumbnail">
+		<img src="${img}" class="left">
+		<div class="right">
+			<h1>Why you Need More Magnesium in Your Daily Diet</h1>
+			<div class="author">
+				<img src="https://randomuser.me/api/portraits/men/95.jpg">
+				<h2>Igor MARTY</h2>
+			</div>
+			<div class="separator"></div>
+			<p>Magnesium is one of the six essential macro-minerals that is required by the body for energy production and synthesis of protein and enzymes. It contributes to the development of bones and most importantly it is responsible for synthesis of your DNA and RNA. A new report that has appeared in theBritish Journal of Cancer, gives you another reason to add more magnesium to your diet...</p>
+			<h5>12</h5>
+			<h6>JANUARY</h6>
+			<ul>
+				<li>
+					<i class="fa fa-eye fa-2x"></i>
+				</li>
+				<li>
+					<i class="fa fa-heart-o fa-2x"><i>
+				</li>
+				<li>
+					<i class="fa fa-envelope-o fa-2x"></i>
+				</li>
+				<li>
+					<i class="fa fa-share-alt fa-2x"></i>
+				</li>
+			</ul>
+			<div class="fab">
+				<i class="fa fa-arrow-down fa-3x"></i>
 			</div>
 		</div>
-	`
+	</div>
+</div>`
 }

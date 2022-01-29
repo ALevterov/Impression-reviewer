@@ -1,4 +1,4 @@
-import { listeners } from './eventListeners'
+import { listeners } from '../additional/eventListeners'
 export function logInHandler() {
   const signUpBtn = document.getElementById('signUpBtn')
   const signInBtn = document.getElementById('signInBtn')
@@ -6,10 +6,10 @@ export function logInHandler() {
   signUpBtn.removeEventListener('click', listeners.signUpBtn)
   signUpBtn.addEventListener('click', listeners.signOutHandler)
   signUpBtn.id = 'logOutBtn'
-  signUpBtn.innerHTML = 'Выйти'
+  signUpBtn.innerHTML = `<a href="#" class="btn btn-sm animated-button sandy-one">Выйти</a>`
 
   signInBtn.removeEventListener('click', listeners.signInBtn)
   signInBtn.addEventListener('click', listeners.myProfile)
   signInBtn.id = 'myProfileBtn'
-  signInBtn.innerHTML = 'Мой профиль'
+  signInBtn.innerHTML = `<a href="#" class="btn btn-sm animated-button sandy-one">Мой профиль</a>`
 }

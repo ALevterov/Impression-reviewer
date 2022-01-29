@@ -1,4 +1,5 @@
 export function closeModal(event, modal, forced = false) {
+  event.preventDefault()
   let closable = false
   if (event) closable = event.target.dataset['closable']
 
