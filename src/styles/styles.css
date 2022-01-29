@@ -5,6 +5,7 @@ html {
 }
 body {
   font-family: 'Kumbh Sans', sans-serif;
+  color: #fff;
 }
 * {
   box-sizing: border-box;
@@ -31,7 +32,7 @@ body {
 .header > h1 > a {
   text-transform: uppercase;
   text-decoration: none;
-  color: #000;
+  color: #fff;
   font-size: 2.2rem;
   padding: 20px;
   display: inline-block;
@@ -51,13 +52,12 @@ ul.sub-list-depth > li {
   transition: all 0.3s ease-in-out;
 }
 ul.sub-list-depth > li:hover {
-  color: #49c5b6;
   cursor: pointer;
 }
 ul.sub-list-depth > li::after {
   content: '';
   display: block;
-  background: #49c5b6;
+  background: #fff;
   width: 0%;
   height: 1px;
   transition: all 0.3s ease-in-out;
@@ -80,20 +80,98 @@ ul.sub-list-depth > li > i {
   font-size: 1.6rem;
   letter-spacing: 0;
 }
-.login-buttons > button.btn {
-  font-size: 1.6rem;
-  border: 1px solid #000;
-  border-radius: 36px;
-  background-color: transparent;
-  padding: 8px 20px;
+/* #signInBtn:hover {
+  background-color: #fff;
+} */
+a.animated-button:link,
+a.animated-button:visited {
+  position: relative;
+  display: block;
+  margin: 30px auto 0;
+  padding: 14px 15px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
   overflow: hidden;
-  transition: all 0.3s ease-in-out;
+  letter-spacing: 0.08em;
+  border-radius: 0;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
 }
-.login-buttons > button.btn:hover {
-  border-color: #49c5b6;
-  color: #49c5b6;
-  background-color: transparent;
+a.animated-button:link:after,
+a.animated-button:visited:after {
+  content: '';
+  position: absolute;
+  height: 0%;
+  left: 50%;
+  top: 50%;
+  width: 150%;
+  z-index: -1;
+  -webkit-transition: all 0.75s ease 0s;
+  -moz-transition: all 0.75s ease 0s;
+  -o-transition: all 0.75s ease 0s;
+  transition: all 0.75s ease 0s;
+}
+a.animated-button:link:hover,
+a.animated-button:visited:hover {
+  color: #fff;
+  text-shadow: none;
+}
+a.animated-button:link:hover:after,
+a.animated-button:visited:hover:after {
+  height: 450%;
+}
+a.animated-button:link,
+a.animated-button:visited {
+  position: relative;
+  display: block;
+  margin: 30px auto 0;
+  padding: 14px 15px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 0;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+a.animated-button.sandy-one {
+  padding: 8px 20px;
+  font-size: 1.4rem;
+  border: 2px solid #aea8d3;
+  color: #fff;
+}
+a.animated-button.sandy-one:after {
+  border: 3px solid #aea8d3;
+  opacity: 0;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+a.animated-button.sandy-one:hover:after {
+  height: 120% !important;
+  opacity: 1;
+  color: #fff;
 }
 .main__body {
-  background-image: url('../images/background.jpg');
+  width: 100%;
+  height: 100vh;
+  background-image: url('../images/back6.jpg');
+  background-size: cover;
+  object-fit: cover;
+  background-repeat: no-repeat;
 }

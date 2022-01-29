@@ -11,6 +11,7 @@ module.exports = {
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: 'images/[hash][ext][query]',
   },
   plugins: [
     new HTMLWebpackPlugin({
@@ -24,13 +25,13 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
+      // {
+      //   test: /\.(png|jpg|jpeg|svg|gif)$/,
+      //   use: ['file-loader'],
+      // },
       {
-        test: /\.(png|jpg|jpeg|svg|gif)$/,
-        loader: 'file-loader',
-        options: {
-          publicPath: '../../',
-          name: path.images,
-        },
+        test: /\.jpg/,
+        type: 'asset/resource',
       },
     ],
   },
