@@ -31,6 +31,6 @@ export function createUserHandler(event, modal) {
       closeModal(null, modal, true)
     })
     .catch((error) => {
-      console.log('Create user error', error)
+      alert('Create user error', error)
     })
 }

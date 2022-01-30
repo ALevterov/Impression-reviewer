@@ -7,6 +7,6 @@ export function signOutWrapper() {
       console.log('signout successeful')
     })
     .catch((error) => {
-      console.log('signout error', error)
+      alert('signout error', error)
     })
 }

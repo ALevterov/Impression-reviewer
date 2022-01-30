@@ -18,7 +18,6 @@ export function authFormHandler(event, modal) {
 
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          console.log('User is loggedIn now!')
           logInHandler()
         } else {
           signOutHandler()
