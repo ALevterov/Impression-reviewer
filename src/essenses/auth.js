@@ -30,6 +30,6 @@ export function authFormHandler(event, modal) {
       closeModal(null, modal, true)
     })
     .catch((error) => {
-      console.log('signIn error', error)
+      alert('signIn error', error)
     })
 }

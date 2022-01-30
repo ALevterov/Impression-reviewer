@@ -20,7 +20,6 @@ const drinksPage = document.getElementById('drinks')
 
 signInBtn.addEventListener('click', listeners.signInBtn)
 signInModal.addEventListener('click', listeners.signInModal)
-signInModal.addEventListener('click', listeners)
 
 signUpBtn.addEventListener('click', listeners.signUpBtn)
 signUpModal.addEventListener('click', listeners.signUpModal)

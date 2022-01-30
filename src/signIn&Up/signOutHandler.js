@@ -1,6 +1,5 @@
 import { listeners } from '../additional/eventListeners'
-export function signOutHandler(event) {
-  event.preventDefault()
+export function signOutHandler() {
   const logOutBtn = document.getElementById('logOutBtn')
   const myProfileBtn = document.getElementById('myProfileBtn')
 
