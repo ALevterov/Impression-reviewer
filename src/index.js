@@ -1,6 +1,5 @@
 import './styles/styles.css'
 import './styles/drinks.css'
-import './styles/addposts.css'
 import './essenses/user'
 import { drinksPageHandler } from './pages/drinkspage'
 import { listeners } from './additional/eventListeners'
@@ -21,6 +20,7 @@ const drinksPage = document.getElementById('drinks')
 
 signInBtn.addEventListener('click', listeners.signInBtn)
 signInModal.addEventListener('click', listeners.signInModal)
+signInModal.addEventListener('click', listeners)
 
 signUpBtn.addEventListener('click', listeners.signUpBtn)
 signUpModal.addEventListener('click', listeners.signUpModal)

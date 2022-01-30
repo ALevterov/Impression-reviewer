@@ -7,6 +7,7 @@ export function createPostItem(
   starsCount,
   date
 ) {
+  const author = 'Автор'
   let plusSvg = `
   	<svg fill="#000000" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="12px" height="12px"><path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z"/></svg>`
 
@@ -45,59 +46,41 @@ export function createPostItem(
     }
     return string
   }
-  // return `
-  // <div class="post">
-  // 			<h1 class="post-header">${header}</h1>
-  // 			<div class="post-date">${date}</div>
-  // 			<div class="post-stars">${createStarString(starsCount)}</div>
-  // 			<div class="post-plus">
-  // 			<p> ${plusSvg} Достоинства: <p>
-  // 			<p> ${plus}<p>
-  // 			</div>
-  // 			<div class="post-minus">
-  // 			<p> ${minusSvg} Недостатки <p>
-  // 			<p> ${minus}<p>
-  // 			</div>
-  // 			<div class="post-image">${img}</div>
-  // 			<div class="post-description">
-  // 				${description}
-  // 			</div>
-
-  // 		</div>
-  // 	</div>
-  // `
   return `
-<div class="card">
-	<div class="thumbnail">
-		<img src="${img}" class="left">
-		<div class="right">
-			<h1>Why you Need More Magnesium in Your Daily Diet</h1>
-			<div class="author">
-				<img src="https://randomuser.me/api/portraits/men/95.jpg">
-				<h2>Igor MARTY</h2>
-			</div>
-			<div class="separator"></div>
-			<p>Magnesium is one of the six essential macro-minerals that is required by the body for energy production and synthesis of protein and enzymes. It contributes to the development of bones and most importantly it is responsible for synthesis of your DNA and RNA. A new report that has appeared in theBritish Journal of Cancer, gives you another reason to add more magnesium to your diet...</p>
-			<h5>12</h5>
-			<h6>JANUARY</h6>
-			<ul>
-				<li>
-					<i class="fa fa-eye fa-2x"></i>
-				</li>
-				<li>
-					<i class="fa fa-heart-o fa-2x"><i>
-				</li>
-				<li>
-					<i class="fa fa-envelope-o fa-2x"></i>
-				</li>
-				<li>
-					<i class="fa fa-share-alt fa-2x"></i>
-				</li>
-			</ul>
-			<div class="fab">
-				<i class="fa fa-arrow-down fa-3x"></i>
-			</div>
-		</div>
-	</div>
-</div>`
+  	<div class="post">
+				<div class="thumbnail">${img}</div>
+				<div class="post-right">
+					<div class="post-header">
+						<h1>${header}</h1>
+						<div class="header-author">
+							<span class="author-name">
+								${author}
+							</span>
+						</div>
+					</div>
+					<div class="separator"></div>
+					<div class="post-plus">
+						<p> ${plusSvg} Достоинства: <p>
+						<p class="text"> ${plus}<p>
+  				</div>
+					<div class="post-minus">
+						<p> ${minusSvg} Недостатки: <p>
+						<p class="text"> ${minus}<p>
+  				</div>
+					<div class="separator"></div>
+					<div class="post-description">
+  					${description}
+  				</div>
+				</div>
+				<div class="post-bottom">
+					<div class="post-date"> 
+						<span class="date">
+							<i class="far fa-calendar-alt"></i>${date}
+						</span> 
+						<span class="post-stars">Оценка: ${createStarString(starsCount)}</span>
+					</div>
+					
+				</div>
+  	</div>
+  `
 }
