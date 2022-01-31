@@ -5,14 +5,15 @@ import { Post } from '../essenses/post'
 // import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyBd47pDOwXOBjmLwWclzincO3mpTpkSYGk',
-  authDomain: 'mealreviewer.firebaseapp.com',
-  projectId: 'mealreviewer',
-  storageBucket: 'mealreviewer.appspot.com',
-  messagingSenderId: '509649353294',
-  appId: '1:509649353294:web:385fc8786713e6bf9ba11f',
-  measurementId: 'G-XX9ML2K4FV',
+  apiKey: 'AIzaSyDaL-jRvZOfqqXOYmET1IwSc0BkNY-2Lgw',
+  authDomain: 'impressionreviewer.firebaseapp.com',
+  projectId: 'impressionreviewer',
+  storageBucket: 'impressionreviewer.appspot.com',
+  messagingSenderId: '620669256490',
+  appId: '1:620669256490:web:c68ef96b8a8573d0d9d453',
+  measurementId: 'G-SP7DX06ZZX',
 }
+
 const app = firebase.initializeApp(firebaseConfig)
 
 const storage = getStorage(app)
