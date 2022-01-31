@@ -25,7 +25,6 @@ const app = firebase.initializeApp(firebaseConfig)
 const storage = getStorage(app)
 
 export function loadPostContent(section, postContainer) {
-  let postDataContainer = []
   let promiseArray = []
   const rootRef = ref(storage, `${section}`)
   list(rootRef).then((postPrefixesContainer) => {

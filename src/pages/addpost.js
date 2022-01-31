@@ -1,9 +1,6 @@
 import firebase from 'firebase/compat/app'
-import { getStorage, ref, uploadBytes, uploadString } from 'firebase/storage'
-import { Post } from '../essenses/post'
-// import { appendChild } from 'domutils'
-// import { getAnalytics } from "firebase/analytics";
-
+import { getStorage, ref, uploadBytes } from 'firebase/storage'
+import { clearForm } from '../additional/clearForm'
 const firebaseConfig = {
   apiKey: 'AIzaSyDaL-jRvZOfqqXOYmET1IwSc0BkNY-2Lgw',
   authDomain: 'impressionreviewer.firebaseapp.com',
@@ -18,7 +15,7 @@ const app = firebase.initializeApp(firebaseConfig)
 
 const storage = getStorage(app)
 
-export function PostPage() {
+export function postPage() {
   const mainBody = document.querySelector('.main__body')
   let HTML = `
 		<div class="add-post__wrapper">
@@ -44,35 +41,31 @@ export function PostPage() {
 						<label for="post-plus" class="form-label no-margin"
 							>Плюсы:</label
 						>
-						<input
-							type="text"
-							class="form-control"
+						<textarea
+							class="form-control form-plus"
 							id="post-plus"
-							required
-						/>
+						></textarea>
 						<label for="post-minus" class="form-label no-margin"
 							>Минусы:</label
 						>
-						<input
-							type="text"
-							class="form-control"
+						<textarea
+							class="form-control form-minus"
 							id="post-minus"
-							required
-						/>
+						></textarea>
 					<label for="formFile" class="form-label">Загрузить картинку:</label>
   			<input class="form-control" type="file" id="formFile" accept=".png, .jpg, .jpeg, .gif">
 			  <div class="image-container"></div>
 				<label for="textarea" class="form-label">Ваш отзыв о продукте:</label>
-				<textarea class="form-control" id="textarea" rows="3"></textarea>
+				<textarea class="form-control form-description" id="textarea" rows="3"></textarea>
 				<div class="star-container" id="star-container">
 				<span>Общая оценка: <span>
-				<i class="fas fa-star" id="1"></i>
+				<i class="far fa-star" id="1"></i>
 				<i class="far fa-star" id="2"></i>
 				<i class="far fa-star" id="3"></i>
 				<i class="far fa-star" id="4"></i>
 				<i class="far fa-star" id="5"></i>
 				</div>	
-				<button type="submit" class="btn btn-outline-success" id="create-post">Создать пост</button>
+				<button type="submit" class="btn btn-create-post" id="create-post">Создать пост</button>
 				</form>
 				</div>				
 		</div>
@@ -96,13 +89,14 @@ export function PostPage() {
   const stars = document.querySelectorAll('.fa-star')
   console.log(stars)
   stars.forEach((star) => {
-    star.addEventListener('click', (event) => starClickHandler(event))
+    star.addEventListener('click', (event) =>
+      starClickHandler(+event.target.id)
+    )
   })
-  function starClickHandler(event) {
+  function starClickHandler(id) {
     const starContainer = document.getElementById('star-container')
-    const id = +event.target.id
     starsCount = id || 1
-    if (!id) return
+    if (!id && id !== 0) return
     for (let i = 0; i < id; i++) {
       stars[i].classList.remove('far')
       stars[i].classList.add('fas')
@@ -124,6 +118,7 @@ export function PostPage() {
       const shownImage = ev.target.result
       const img = document.createElement('img')
       img.src = shownImage
+      img.classList.add('form-image')
       imageContainer.insertAdjacentElement('afterbegin', img)
     }
     reader.readAsDataURL(image)
@@ -197,6 +192,25 @@ export function PostPage() {
     uploadBytes(headerRef, headerBytes, headerMetaData)
     uploadBytes(plusRef, plusBytes, plusMetaData)
     uploadBytes(minusRef, minusBytes, minusMetaData)
+    const fileInput = mainBody.querySelector('#formFile')
+    const textInput = mainBody.querySelector('#textarea')
+    const subBtn = mainBody.querySelector('#create-post')
+    const imageContainer = mainBody.querySelector('.image-container')
+    const postHeader = mainBody.querySelector('#post-header')
+    const plusInput = mainBody.querySelector('#post-plus')
+    const minusInput = mainBody.querySelector('#post-minus')
+    const selectArea = mainBody.querySelector('#select-area')
+    clearForm(
+      fileInput,
+      textInput,
+      postHeader,
+      plusInput,
+      minusInput,
+      selectArea
+    )
+    const deletedImage = imageContainer.childNodes[0]
+    deletedImage.parentNode.removeChild(deletedImage)
+    starClickHandler(0)
   }
   fileInput.addEventListener('change', inputChangeHandler)
   function submitHandler() {

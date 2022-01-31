@@ -1,6 +1,4 @@
-import { Post } from '../essenses/post'
-import { PostPage } from './addpost'
-import { loadPostContent } from '../additional/loadfiles'
+import { loadPostContent } from '../additional/loadfilesNew'
 import { setActiveNavLink } from '../additional/setActiveLink'
 
 export function drinksPageHandler(event) {
@@ -10,28 +8,10 @@ export function drinksPageHandler(event) {
 	<div class="drinks__posts__wrapper">
 		<div class="drinks-container" id="post-container">
 		</div>
-		<aside class="right-sidebar" style="height: ${clientheight}px">
-		<div class="add-post">
-			<span>Здесь вы можете добавить новый пост</span>
-		<button
-		type="button"
-		class="btn btn-success"
-		data-action="create"
-		id="create"
-	>
-		Добавить пост
-	</button>
-		</div>
-		
-		</aside>
+	</div>
 	`
   const mainBody = document.querySelector('.main__body')
   mainBody.innerHTML = HTML
-  const createBtn = mainBody.querySelector('#create')
-  createBtn.addEventListener('click', (event) => {
-    event.preventDefault()
-    PostPage()
-  })
   if (event.target.id) {
     setActiveNavLink(event.target.id)
   } else {

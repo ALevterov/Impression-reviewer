@@ -10,3 +10,6 @@
   position: relative;
   margin: 140px auto 0;
 }
+.btn-addpost:hover {
+  cursor: pointer;
+}
