@@ -115,25 +115,25 @@ export function loadPostContent(section, postContainer) {
                   const postFile = topicFolder[postKey][fileKey]
                   switch (postFile.type) {
                     case 'image':
-                      img = blobTo(postFile)
+                      img = blobTo(postFile.file.value, postFile.type)
 
                       break
                     case 'header':
-                      header = blobTo(postFile)
+                      header = blobTo(postFile.file.value, postFile.type)
                       starsCount = +postFile.starsCount
                       date = +postFile.date
 
                       break
                     case 'description':
-                      description = blobTo(postFile)
+                      description = blobTo(postFile.file.value, postFile.type)
 
                       break
                     case 'plus':
-                      plus = blobTo(postFile)
+                      plus = blobTo(postFile.file.value, postFile.type)
 
                       break
                     case 'minus':
-                      minus = blobTo(postFile)
+                      minus = blobTo(postFile.file.value, postFile.type)
 
                       break
                   }

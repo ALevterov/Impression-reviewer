@@ -1,4 +1,4 @@
-import { loadPostContent } from '../additional/loadfilesNew'
+import { loadPostContent } from '../additional/loadfiles'
 import { setActiveNavLink } from '../additional/setActiveLink'
 
 export function drinksPageHandler(event) {

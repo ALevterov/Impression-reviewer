@@ -1,11 +1,11 @@
-.profile__wrapper {
+.drinks__posts__wrapper {
   width: 100%;
   height: 100vh;
   position: relative;
   margin-top: 140px;
   background-color: #232529;
 }
-.profile-container {
+.drinks-container {
   padding: 1px 0;
   position: relative;
   margin: 140px auto 0;

@@ -1,5 +1,4 @@
-export function blobTo(File) {
-  let uint8array = File.file.value
+export function blobTo(uint8array, type) {
   const options = {
     image: blobToImage,
     header: blobToString,
@@ -19,5 +18,5 @@ export function blobTo(File) {
     return new TextDecoder('utf-8').decode(uint8array)
   }
 
-  return options[File.type]()
+  return options[type]()
 }

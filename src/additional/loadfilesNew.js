@@ -9,7 +9,6 @@ import {
 } from 'firebase/storage'
 import { blobTo } from './blobTo'
 import { createPostItem } from './createPost'
-// import { Post } from '../essenses/post'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDaL-jRvZOfqqXOYmET1IwSc0BkNY-2Lgw',
@@ -24,134 +23,61 @@ const app = firebase.initializeApp(firebaseConfig)
 
 const storage = getStorage(app)
 
-export function loadPostContent(section, postContainer) {
+export async function loadPostContent(section, postContainer) {
   const rootRef = ref(storage, `${section}`)
-  list(rootRef).then((postPrefixContainer) => {
-    postPrefixContainer.prefixes.forEach((prefix) => {
-      list(prefix).then((itemContainer) => {
-        let postsTempContainer = {}
-        let postsStructuredContainer = {}
-        let fileArray = []
-        let promiseArray = []
-        let topic
-        itemContainer.items.forEach((file) => {
-          fileArray.push(file)
+  const postPrefixContainer = await list(rootRef)
+  const numberOfPosts = postPrefixContainer.prefixes.length
+  for (let i = 0; i < numberOfPosts; i++) {
+    const prefix = postPrefixContainer.prefixes[i]
+    const itemContainer = await list(prefix)
+    const numberOfItems = itemContainer.items.length
+    const postFiles = {}
+    for (let j = 0; j < numberOfItems; j++) {
+      const file = itemContainer.items[j]
+      console.log('hello')
+      const fileMeta = await getMetadata(file) // занимает большое время
 
-          promiseArray.push(getMetadata(file))
-        })
-        console.log('promiseArray', promiseArray)
-        console.log('fileArray', fileArray)
-        Promise.all(promiseArray).then((values) => {
-          promiseArray = []
-          values.forEach((fileMetadata) => {
-            const meta = fileMetadata.customMetadata
-            let postObj = { ...meta }
-            const url = meta.ref
-            fileArray.forEach((file) => {
-              if (url.match(file.fullPath)) {
-                postObj.file = file
-              }
-            })
-            topic = meta.topic
-            postsTempContainer[`${meta.topic}/${meta.post}/${meta.type}`] =
-              postObj
-          })
-          postsStructuredContainer[topic] = {}
-          for (let key of Object.keys(postsTempContainer)) {
-            const post = postsTempContainer[key]
+      const downLoadUrl = await getDownloadURL(file) // занимает большое время
+      const type = fileMeta.customMetadata.type
+      console.log('hello 2')
+      postFiles[type] = {}
+      postFiles[type].metaData = fileMeta.customMetadata
+      const response = await fetch(downLoadUrl, { method: 'GET' }) // проходит моментально
 
-            if (!postsStructuredContainer[topic][post.post])
-              postsStructuredContainer[topic][post.post] = {}
+      postFiles[type].file = await response.body.getReader().read() // проходит моментально
+    }
+    let img, header, description, plus, minus, date, starsCount
+    for (let key of Object.keys(postFiles)) {
+      const postFile = postFiles[key]
+      switch (key) {
+        case 'image':
+          img = blobTo(postFile.file.value, key)
 
-            postsStructuredContainer[topic][post.post][post.type] = post
-          }
-          // в postsStructuredContainer содержатся файлы, распределенные по топику, посту и типу файла
-          console.log(postsStructuredContainer)
-          for (let postKey of Object.keys(postsStructuredContainer[topic])) {
-            const topicFolder = postsStructuredContainer[topic]
-            for (let fileKey of Object.keys(topicFolder[postKey])) {
-              const post = topicFolder[postKey]
-              let fileRef = post[fileKey].file
-              promiseArray.push(getDownloadURL(fileRef))
-            }
-          }
-          Promise.all(promiseArray).then((downloadLinks) => {
-            promiseArray = []
-            downloadLinks.forEach((url) => {
-              promiseArray.push(fetch(url, { method: 'GET' }))
-            })
+          break
+        case 'header':
+          header = blobTo(postFile.file.value, key)
+          starsCount = +postFile.metaData.starsCount
+          date = +postFile.metaData.date
 
-            Promise.all(promiseArray).then((responses) => {
-              promiseArray = []
-              responses.forEach((response) => {
-                promiseArray.push(response.body.getReader().read())
-              })
-              Promise.all(promiseArray).then((chunks) => {
-                let i = 0
-                while (i < chunks.length) {
-                  for (let postKey of Object.keys(
-                    postsStructuredContainer[topic]
-                  )) {
-                    const topicFolder = postsStructuredContainer[topic]
-                    for (let fileKey of Object.keys(topicFolder[postKey])) {
-                      const post = topicFolder[postKey][fileKey]
-                      topicFolder[postKey][fileKey].file = chunks[i]
-                      i++
-                    }
-                  }
-                }
-                // теперь в поле file содержится Uint8Array! то есть сам файл
-                // console.log(postsStructuredContainer)
-                for (let postKey of Object.keys(
-                  postsStructuredContainer[topic]
-                )) {
-                  const topicFolder = postsStructuredContainer[topic]
-                  let img, header, description, plus, minus, date, starsCount
-                  for (let fileKey of Object.keys(topicFolder[postKey])) {
-                    const postFile = topicFolder[postKey][fileKey]
-                    switch (postFile.type) {
-                      case 'image':
-                        img = blobTo(postFile)
+          break
+        case 'description':
+          description = blobTo(postFile.file.value, key)
 
-                        break
-                      case 'header':
-                        header = blobTo(postFile)
-                        starsCount = +postFile.starsCount
-                        date = +postFile.date
+          break
+        case 'plus':
+          plus = blobTo(postFile.file.value, key)
 
-                        break
-                      case 'description':
-                        description = blobTo(postFile)
+          break
+        case 'minus':
+          minus = blobTo(postFile.file.value, key)
 
-                        break
-                      case 'plus':
-                        plus = blobTo(postFile)
-
-                        break
-                      case 'minus':
-                        minus = blobTo(postFile)
-
-                        break
-                    }
-                  }
-                  postContainer.insertAdjacentHTML(
-                    'beforeend',
-                    createPostItem(
-                      img,
-                      header,
-                      description,
-                      plus,
-                      minus,
-                      starsCount,
-                      date
-                    )
-                  )
-                }
-              })
-            })
-          })
-        })
-      })
-    })
-  })
+          break
+      }
+    } // проходит моментально
+    console.log('hello 5')
+    postContainer.insertAdjacentHTML(
+      'beforeend',
+      createPostItem(img, header, description, plus, minus, starsCount, date)
+    ) // проходит моментально
+  }
 }
