@@ -1,6 +1,7 @@
 import firebase from 'firebase/compat/app'
 import { getStorage, ref, uploadBytes } from 'firebase/storage'
 import { clearForm } from '../additional/clearForm'
+import { getAuth } from 'firebase/auth'
 const firebaseConfig = {
   apiKey: 'AIzaSyDaL-jRvZOfqqXOYmET1IwSc0BkNY-2Lgw',
   authDomain: 'impressionreviewer.firebaseapp.com',
@@ -141,6 +142,14 @@ export function postPage() {
     const headerRef = ref(storage, `${folderName}/${header}`)
     const plusRef = ref(storage, `${folderName}/plus`)
     const minusRef = ref(storage, `${folderName}/minus`)
+
+    let displayName = 'Анонимный пользователь'
+    const auth = getAuth()
+    const user = auth.currentUser
+    if (user !== null) {
+      displayName = user.displayName
+    }
+
     const imgMetaData = {
       customMetadata: {
         topic: `drinksPosts`,
@@ -165,6 +174,7 @@ export function postPage() {
         ref: `${headerRef}`,
         starsCount: `${starsCount}`,
         date: `${Date.now()}`,
+        userName: `${displayName}`,
       },
     }
     const plusMetaData = {
@@ -183,6 +193,7 @@ export function postPage() {
         ref: `${minusRef}`,
       },
     }
+
     const headerBytes = new TextEncoder().encode(header)
     const descriptionBytes = new TextEncoder().encode(description)
     const plusBytes = new TextEncoder().encode(plus)

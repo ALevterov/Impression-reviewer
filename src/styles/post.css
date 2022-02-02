@@ -45,12 +45,13 @@ img {
   left: 0;
 }
 .author-name {
+  white-space: nowrap;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #9ecaff;
   height: 30px;
-  width: 110px;
+  width: 160px;
   border-radius: 20px;
   font-size: 1.2rem;
 }

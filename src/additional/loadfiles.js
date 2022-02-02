@@ -57,7 +57,14 @@ export async function loadPostContent(section, postContainer) {
             .then((file) => {
               postFiles[type].file = file
 
-              let img, header, description, plus, minus, date, starsCount
+              let img,
+                header,
+                description,
+                plus,
+                minus,
+                date,
+                starsCount,
+                userName
 
               for (let key of Object.keys(postFiles)) {
                 const postFile = postFiles[key]
@@ -72,6 +79,8 @@ export async function loadPostContent(section, postContainer) {
                     header = blobTo(postFile.file.value, key)
                     starsCount = +postFile.metaData.starsCount
                     date = +postFile.metaData.date
+                    userName =
+                      postFile.metaData.userName ?? 'Анонимный пользователь'
 
                     break
                   case 'description':
@@ -98,7 +107,7 @@ export async function loadPostContent(section, postContainer) {
                 date
               ) {
                 postContainer.insertAdjacentHTML(
-                  'beforeend',
+                  'afterbegin',
                   createPostItem(
                     img,
                     header,
@@ -106,9 +115,13 @@ export async function loadPostContent(section, postContainer) {
                     plus,
                     minus,
                     starsCount,
-                    date
+                    date,
+                    userName
                   )
                 )
+                if (i === numberOfPosts - 1) {
+                  document.getElementById('loading-spinner').remove()
+                }
               }
             })
             .catch((error) => {

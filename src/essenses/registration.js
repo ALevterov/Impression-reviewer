@@ -1,4 +1,8 @@
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth'
 import { closeModal } from '../modal/closeModal'
 import { onAuthStateChanged } from 'firebase/auth'
 import { logInHandler } from '../signIn&Up/logInHandler'
@@ -8,6 +12,7 @@ export function createUserHandler(event, modal) {
   event.preventDefault()
   const emailInput = modal.querySelector('#email-input')
   const passInput = modal.querySelector('#password-input')
+  const userName = modal.querySelector('#username-input').value.trim()
 
   const auth = getAuth()
   const email = emailInput.value.trim()
@@ -17,6 +22,7 @@ export function createUserHandler(event, modal) {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user
+      updateProfile(user, { displayName: userName })
       onAuthStateChanged(auth, (user) => {
         if (user) {
           console.log('User is loggedIn now!')

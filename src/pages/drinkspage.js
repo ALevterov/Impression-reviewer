@@ -7,6 +7,12 @@ export function drinksPageHandler(event) {
   let HTML = `
 	<div class="drinks__posts__wrapper">
 		<div class="drinks-container" id="post-container">
+		<div class="loadingio-spinner-double-ring-sup9geo55m" id="loading-spinner"><div class="ldio-diitfi1lkuq">
+			<div></div>
+			<div></div>
+			<div><div></div></div>
+			<div><div></div></div>
+			</div></div>
 		</div>
 	</div>
 	`

@@ -5,6 +5,10 @@ import { drinksPageHandler } from './pages/drinkspage'
 import { listeners } from './additional/eventListeners'
 
 // signIn
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('lds-ripple-container').remove()
+  document.getElementById('header').style.display = 'block'
+})
 const signInModal = document.getElementById('signInModal')
 const signInBtn = document.getElementById('signInBtn')
 const enterBtn = document.getElementById('enterBtn')

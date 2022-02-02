@@ -3,6 +3,9 @@
 @import url('drinks.css');
 @import url('post.css');
 @import url('addpost.css');
+@import url('myprofile.css');
+@import url('pagePreLoader.css');
+@import url('postPreLoader.css');
 html {
   font-size: 62.5%;
 }
