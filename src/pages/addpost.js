@@ -88,11 +88,8 @@ export function postPage() {
 
   let image, starsCount
   const stars = document.querySelectorAll('.fa-star')
-  console.log(stars)
-  stars.forEach((star) => {
-    star.addEventListener('click', (event) =>
-      starClickHandler(+event.target.id)
-    )
+  stars.forEach(star => {
+    star.addEventListener('click', event => starClickHandler(+event.target.id))
   })
   function starClickHandler(id) {
     const starContainer = document.getElementById('star-container')
@@ -115,7 +112,7 @@ export function postPage() {
 
     const reader = new FileReader()
 
-    reader.onload = (ev) => {
+    reader.onload = ev => {
       const shownImage = ev.target.result
       const img = document.createElement('img')
       img.src = shownImage
@@ -134,7 +131,6 @@ export function postPage() {
     topicNumber
   ) {
     const topic = topics[topicNumber]
-    console.log(topic)
     const folderName = `${topic}/${header}`
     const folderRef = ref(storage, folderName)
     const imageRef = ref(storage, `${folderName}/${image.name}`)
@@ -232,7 +228,7 @@ export function postPage() {
     const topicNumber = selectArea.value
     onUpload(image, description, header, plus, minus, starsCount, topicNumber)
   }
-  subBtn.addEventListener('click', (event) => {
+  subBtn.addEventListener('click', event => {
     event.preventDefault()
     submitHandler()
   })

@@ -7,9 +7,20 @@
 }
 .profile-container {
   padding: 1px 0;
-  position: relative;
-  margin: 140px auto 0;
+  /* position: relative; */
+  margin-top: 140px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 }
 .btn-addpost:hover {
   cursor: pointer;
+}
+.profile-options {
+  display: flex;
+  flex: 1;
+}
+.profile-sidebar {
+  /* display: flex; */
+  flex: 1;
 }

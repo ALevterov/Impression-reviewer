@@ -4,14 +4,49 @@ export function myProfile() {
   let HTML = `
 	<div class="profile__wrapper">
 		<div class="profile-container">
-		<button
-		type="button"
-		class="btn btn-addpost"
-		data-action="create"
-		id="create"
-		>
-			Добавить пост
-		</button>
+				<div class="profile-options">
+					<div class="modal-content">
+					<div class="modal-header">
+						<div class="modal-header-center">Регистрация</div>
+					</div>
+					<div class="modal-body">
+						<input
+							type="email"
+							class="form-control"
+							id="email-input"
+							placeholder="Email"
+						/>
+						<input
+							type="email"
+							class="form-control"
+							id="username-input"
+							placeholder="Username"
+						/>
+						<input
+							type="password"
+							class="form-control"
+							id="password-input"
+							placeholder="Password"
+						/>
+					</button>
+					<button type="button" class="btn" id="createUserBtn">
+						Зарегистрироваться
+					</button>
+					</div>
+					<div class="modal-footer">
+					</div>
+				</div>
+				<div class="profile-sidebar">
+					<button
+						type="button"
+						class="btn btn-addpost"
+						data-action="create"
+						id="create"
+						>
+						Создать пост
+					</button>
+				</div>
+			</div>
 		</div>
 	</div>
 	`
