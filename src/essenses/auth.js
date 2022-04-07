@@ -5,8 +5,8 @@ import { logInHandler } from '../signIn&Up/logInHandler'
 import { signOutHandler } from '../signIn&Up/signOutHandler'
 export function authFormHandler(event, modal) {
   event.preventDefault()
-  const emailInput = modal.querySelector('#email-input')
-  const passInput = modal.querySelector('#password-input')
+  const emailInput = modal.querySelector('#email-input-auth')
+  const passInput = modal.querySelector('#password-input-auth')
 
   const email = emailInput.value.trim()
   const password = passInput.value.trim()

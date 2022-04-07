@@ -1,7 +1,9 @@
 import {
   getAuth,
   signInWithEmailAndPassword,
+  updateEmail,
   updatePassword,
+  updateProfile,
 } from 'firebase/auth'
 
 import { postPage } from '../pages/addpost'
@@ -24,15 +26,14 @@ export function myProfile() {
                 <input
                   type="text"
                   class="form-control"
-                  id="old-pass"
+                  id="new-email"
                   placeholder="Введите новый email"
                   required
                 />
                 <button
                   type="submit"
                   class="btn btn-create-post"
-                  id="btn-change"
-                  disabled
+									id="btn-change-email"
                 >
                   Изменить Email
                 </button>
@@ -49,15 +50,14 @@ export function myProfile() {
                 <input
                   type="text"
                   class="form-control"
-                  id="old-pass"
+                  id="new-username"
                   placeholder="Введите новое имя пользователя"
                   required
                 />
                 <button
                   type="submit"
                   class="btn btn-create-post"
-                  id="btn-change"
-                  disabled
+									id="btn-change-username"
                 >
                   Изменить Имя
                 </button>
@@ -94,7 +94,7 @@ export function myProfile() {
                 <button
                   type="submit"
                   class="btn btn-create-post"
-                  id="btn-change"
+                  id="btn-change-pass"
                   disabled
                 >
                   Изменить пароль
@@ -126,11 +126,21 @@ export function myProfile() {
 
   const retypeNewPass = document.getElementById('retype-new-pass')
 
-  const btnChange = document.getElementById('btn-change')
+  const btnChangePass = document.getElementById('btn-change-pass')
+
+  const btnChangeEmail = document.getElementById('btn-change-email')
+
+  const btnChangeUsername = document.getElementById('btn-change-username')
 
   const toggleHandler = event => {
-    const arrow = event.target.querySelector('#arrow')
-    const toggled = event.target.nextElementSibling
+    console.log(event.target)
+    let targetNode = event.target
+    if (event.target.nodeName === 'I') {
+      targetNode = targetNode.parentNode
+    }
+    console.log(targetNode)
+    const arrow = targetNode.querySelector('#arrow')
+    const toggled = targetNode.nextElementSibling
     toggled.classList.toggle('hidden')
     if (arrow.classList.contains('fa-chevron-down')) {
       arrow.classList.remove('fa-chevron-down')
@@ -140,8 +150,13 @@ export function myProfile() {
       arrow.classList.remove('fa-chevron-up')
     }
   }
+
+  const dblclickHandler = event => {
+    event.preventDefault()
+  }
   toggleTargets.forEach(TT => {
     TT.addEventListener('click', toggleHandler)
+    TT.firstChild.addEventListener('dblclick', dblclickHandler)
   })
 
   const changeInputHandler = () => {
@@ -149,9 +164,9 @@ export function myProfile() {
       newPass.value.trim().length < 6 ||
       newPass.value !== retypeNewPass.value
     ) {
-      btnChange.disabled = true
+      btnChangePass.disabled = true
     } else {
-      btnChange.disabled = false
+      btnChangePass.disabled = false
     }
   }
   const clearInputs = (...args) => {
@@ -159,7 +174,7 @@ export function myProfile() {
       arg.value = ''
     })
   }
-  const btnChangeHandler = event => {
+  const btnChangePassHandler = event => {
     event.preventDefault()
     const pass = oldPass.value.trim()
     signInWithEmailAndPassword(auth, email, pass)
@@ -180,9 +195,43 @@ export function myProfile() {
       })
   }
 
+  const btnChangeEmailHandler = event => {
+    event.preventDefault()
+    const newEmail = document.getElementById('new-email')
+    console.log('new email is ', newEmail.value.trim())
+    updateEmail(auth.currentUser, newEmail.value.trim())
+      .then(() => {
+        console.log('email updated!')
+        newEmail.value = ''
+      })
+      .catch(e => {
+        newEmail.value = ''
+        console.log('fucken email update error!', e)
+      })
+  }
+
+  const btnChangeUsernameHandler = event => {
+    event.preventDefault()
+    const newUserName = document.getElementById('new-username')
+    updateProfile(auth.currentUser, {
+      displayName: newUserName.value.trim(),
+    })
+      .then(() => {
+        console.log('UserName updated!')
+        newUserName.value = ''
+      })
+      .catch(e => {
+        newUserName.value = ''
+        console.log('fucken UserName update error!', e)
+      })
+  }
+
   newPass.addEventListener('input', changeInputHandler)
   retypeNewPass.addEventListener('input', changeInputHandler)
-  btnChange.addEventListener('click', btnChangeHandler)
+
+  btnChangePass.addEventListener('click', btnChangePassHandler)
+  btnChangeEmail.addEventListener('click', btnChangeEmailHandler)
+  btnChangeUsername.addEventListener('click', btnChangeUsernameHandler)
 
   const createBtn = mainBody.querySelector('#create')
   createBtn.addEventListener('click', postPage)
