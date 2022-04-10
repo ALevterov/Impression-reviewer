@@ -13,10 +13,10 @@ export function authFormHandler(event, modal) {
   const auth = getAuth()
 
   signInWithEmailAndPassword(auth, email, password)
-    .then(userCredential => {
+    .then((userCredential) => {
       const user = userCredential.user
 
-      onAuthStateChanged(auth, user => {
+      onAuthStateChanged(auth, (user) => {
         if (user) {
           logInHandler()
         } else {
@@ -28,7 +28,7 @@ export function authFormHandler(event, modal) {
       passInput.value = ''
       closeModal(null, modal, true)
     })
-    .catch(error => {
+    .catch((error) => {
       alert('signIn error', error)
     })
 }

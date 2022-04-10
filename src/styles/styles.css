@@ -48,8 +48,8 @@ body {
   display: inline-block;
   white-space: nowrap;
 }
-.header > h1 > a:hover {
-  cursor: default;
+.header > h1:hover {
+  cursor: pointer;
 }
 .sub-list {
   position: absolute;
@@ -94,7 +94,9 @@ ul.sub-list-depth > li > i {
   font-size: 1.6rem;
   letter-spacing: 0;
 }
-
+a.navbar-brand:hover {
+  cursor: pointer;
+}
 a.animated-button:link,
 a.animated-button:visited {
   position: relative;
@@ -182,4 +184,13 @@ a.animated-button.sandy-one:hover:after {
   background-size: cover;
   object-fit: cover;
   background-repeat: no-repeat;
+}
+
+@media (min-width: 1200px) {
+}
+@media (min-width: 992px) {
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 576px) {
 }

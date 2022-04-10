@@ -78,7 +78,7 @@
 .modal-body input.form-control:focus {
   outline: none;
 }
-.modal-body > .btn {
+.btn-modal {
   width: 100%;
   background-color: #49c5b6;
   padding: 2rem 4rem;

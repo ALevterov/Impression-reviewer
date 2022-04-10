@@ -88,8 +88,10 @@ export function postPage() {
 
   let image, starsCount
   const stars = document.querySelectorAll('.fa-star')
-  stars.forEach(star => {
-    star.addEventListener('click', event => starClickHandler(+event.target.id))
+  stars.forEach((star) => {
+    star.addEventListener('click', (event) =>
+      starClickHandler(+event.target.id)
+    )
   })
   function starClickHandler(id) {
     const starContainer = document.getElementById('star-container')
@@ -112,7 +114,7 @@ export function postPage() {
 
     const reader = new FileReader()
 
-    reader.onload = ev => {
+    reader.onload = (ev) => {
       const shownImage = ev.target.result
       const img = document.createElement('img')
       img.src = shownImage
@@ -148,7 +150,7 @@ export function postPage() {
 
     const imgMetaData = {
       customMetadata: {
-        topic: `drinksPosts`,
+        topic: topic,
         type: 'image',
         post: `${header}`,
         ref: `${imageRef}`,
@@ -157,7 +159,7 @@ export function postPage() {
     const descriptionMetaData = {
       customMetadata: {
         type: 'description',
-        topic: `drinksPosts`,
+        topic: topic,
         post: `${header}`,
         ref: `${descriptionRef}`,
       },
@@ -165,7 +167,7 @@ export function postPage() {
     const headerMetaData = {
       customMetadata: {
         type: 'header',
-        topic: `drinksPosts`,
+        topic: topic,
         post: `${header}`,
         ref: `${headerRef}`,
         starsCount: `${starsCount}`,
@@ -176,7 +178,7 @@ export function postPage() {
     const plusMetaData = {
       customMetadata: {
         type: 'plus',
-        topic: `drinksPosts`,
+        topic: topic,
         post: `${header}`,
         ref: `${plusRef}`,
       },
@@ -184,7 +186,7 @@ export function postPage() {
     const minusMetaData = {
       customMetadata: {
         type: 'minus',
-        topic: `drinksPosts`,
+        topic: topic,
         post: `${header}`,
         ref: `${minusRef}`,
       },
@@ -228,7 +230,7 @@ export function postPage() {
     const topicNumber = selectArea.value
     onUpload(image, description, header, plus, minus, starsCount, topicNumber)
   }
-  subBtn.addEventListener('click', event => {
+  subBtn.addEventListener('click', (event) => {
     event.preventDefault()
     submitHandler()
   })

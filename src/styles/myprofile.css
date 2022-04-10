@@ -18,7 +18,11 @@
 .user-posts {
   flex: 1;
 }
-.btn-addpost:hover {
+.user-posts .btn-modal {
+  margin: 1rem;
+  max-width: 300px;
+}
+.btn-modal:hover {
   cursor: pointer;
 }
 .hidden {

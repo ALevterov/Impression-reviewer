@@ -106,7 +106,7 @@ export function myProfile() {
         <div class="user-posts">
           <button
             type="button"
-            class="btn btn-addpost"
+            class="btn btn-modal"
             data-action="create"
             id="create"
           >
@@ -132,7 +132,7 @@ export function myProfile() {
 
   const btnChangeUsername = document.getElementById('btn-change-username')
 
-  const toggleHandler = event => {
+  const toggleHandler = (event) => {
     console.log(event.target)
     let targetNode = event.target
     if (event.target.nodeName === 'I') {
@@ -151,10 +151,10 @@ export function myProfile() {
     }
   }
 
-  const dblclickHandler = event => {
+  const dblclickHandler = (event) => {
     event.preventDefault()
   }
-  toggleTargets.forEach(TT => {
+  toggleTargets.forEach((TT) => {
     TT.addEventListener('click', toggleHandler)
     TT.firstChild.addEventListener('dblclick', dblclickHandler)
   })
@@ -170,15 +170,15 @@ export function myProfile() {
     }
   }
   const clearInputs = (...args) => {
-    args.forEach(arg => {
+    args.forEach((arg) => {
       arg.value = ''
     })
   }
-  const btnChangePassHandler = event => {
+  const btnChangePassHandler = (event) => {
     event.preventDefault()
     const pass = oldPass.value.trim()
     signInWithEmailAndPassword(auth, email, pass)
-      .then(data => {
+      .then((data) => {
         updatePassword(user, newPass.value.trim())
           .then(() => {
             console.log('Пароль успешно изменён')
@@ -189,13 +189,13 @@ export function myProfile() {
             clearInputs(oldPass, newPass, retypeNewPass)
           })
       })
-      .catch(error => {
+      .catch((error) => {
         console.log('Неверный пароль!')
         clearInputs(oldPass, newPass, retypeNewPass)
       })
   }
 
-  const btnChangeEmailHandler = event => {
+  const btnChangeEmailHandler = (event) => {
     event.preventDefault()
     const newEmail = document.getElementById('new-email')
     console.log('new email is ', newEmail.value.trim())
@@ -204,13 +204,13 @@ export function myProfile() {
         console.log('email updated!')
         newEmail.value = ''
       })
-      .catch(e => {
+      .catch((e) => {
         newEmail.value = ''
         console.log('fucken email update error!', e)
       })
   }
 
-  const btnChangeUsernameHandler = event => {
+  const btnChangeUsernameHandler = (event) => {
     event.preventDefault()
     const newUserName = document.getElementById('new-username')
     updateProfile(auth.currentUser, {
@@ -220,7 +220,7 @@ export function myProfile() {
         console.log('UserName updated!')
         newUserName.value = ''
       })
-      .catch(e => {
+      .catch((e) => {
         newUserName.value = ''
         console.log('fucken UserName update error!', e)
       })

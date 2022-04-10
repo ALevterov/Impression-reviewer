@@ -1,9 +1,7 @@
 import { loadPostContent } from '../additional/loadfiles'
 import { setActiveNavLink } from '../additional/setActiveLink'
 
-export function drinksPageHandler(event) {
-  let clientheight = window.innerHeight
-  const drinkPosts = ''
+export function renderPostsPage(event, topic) {
   let HTML = `
 	<div class="drinks__posts__wrapper">
 		<div class="drinks-container" id="post-container">
@@ -25,5 +23,5 @@ export function drinksPageHandler(event) {
   }
 
   const postContainer = mainBody.querySelector('#post-container')
-  loadPostContent('drinkPosts', postContainer)
+  loadPostContent(topic, postContainer)
 }
